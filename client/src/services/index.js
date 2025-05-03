@@ -20,3 +20,9 @@ export async function checkAuthService() {
 
   return data;
 }
+
+export async function addNewCourseService(formData) {
+  const { data } = await axiosInstance.post(`/instructor/course/add`, formData);
+
+  return data;
+}

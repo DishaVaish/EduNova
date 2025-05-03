@@ -1,4 +1,4 @@
-
+import { Skeleton } from "@/components/ui/skeleton";
 import { createContext,useState } from "react";
 import { initialSignInFormData, initialSignUpFormData } from "@/config";
 import { registerService , loginService } from "@/services";
@@ -78,6 +78,12 @@ async function checkAuthUser() {
   }
 }
 
+function resetCredentials() {
+  setAuth({
+    authenticate: false,
+    user: null,
+  });
+}
 
 useEffect(() => {
   checkAuthUser();
@@ -85,13 +91,21 @@ useEffect(() => {
 
 console.log(auth);
 
-    return <AuthContext.Provider  value={{
+    return(
+       <AuthContext.Provider  value={{
         signInFormData,
         setSignInFormData,
         signUpFormData,
         setSignUpFormData,
         handleRegisterUser,
          handleLoginUser,
+         auth,
+         resetCredentials,
        
-    }}>{children}</AuthContext.Provider>
+    }}>
+      {
+        loading ? <Skeleton/> : children
+      }
+      </AuthContext.Provider>
+    );
 }
