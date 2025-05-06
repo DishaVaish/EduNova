@@ -160,6 +160,16 @@ export const signUpFormControls = [
     pricing: "",
     objectives: "",
     welcomeMessage: "",
-   
+    image: "",
   };
+
+  export const courseCurriculumInitialFormData = [
+    {
+      title: "",
+      videoUrl: "",
+      freePreview: false,
+      public_id: "",
+    },
+  ];
+
   

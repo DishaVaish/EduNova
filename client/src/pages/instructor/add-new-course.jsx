@@ -10,7 +10,11 @@ import {
 } from "@/config";
 import { AuthContext } from "@/context/auth-context";
 import { InstructorContext } from "@/context/instructor-context";
-
+import {
+  //addNewCourseService,
+  fetchInstructorCourseDetailsService,
+ // updateCourseByIdService,
+} from "@/services";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -94,7 +98,11 @@ function AddNewCoursePage() {
   }
 
   async function fetchCurrentCourseDetails() {
-
+     
+    const response = await fetchInstructorCourseDetailsService(
+      currentEditedCourseId
+    );
+ 
     if (response?.success) {
       const setCourseFormData = Object.keys(
         courseLandingInitialFormData
@@ -109,7 +117,7 @@ function AddNewCoursePage() {
       setCourseCurriculumFormData(response?.data?.curriculum);
     }
 
-    console.log(response, "response");
+   console.log(response, "response");
   }
 
   useEffect(() => {
