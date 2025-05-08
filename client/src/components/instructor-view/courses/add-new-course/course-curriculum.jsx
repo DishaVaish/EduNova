@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-//import VideoPlayer from "@/components/video-player";
+import VideoPlayer from "@/components/video-player";
 import { courseCurriculumInitialFormData } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
 import {
@@ -216,8 +216,8 @@ function CourseCurriculum() {
       </CardHeader>
       <CardContent>
         <Button
-          // disabled={!isCourseCurriculumFormDataValid() || mediaUploadProgress}
-          // onClick={handleNewLecture}
+          disabled={!isCourseCurriculumFormDataValid() || mediaUploadProgress}
+          onClick={handleNewLecture}
         >
           Add Lecture
         </Button>
