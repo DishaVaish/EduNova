@@ -1,4 +1,4 @@
-//import MediaProgressbar from "@/components/media-progress-bar";
+import MediaProgressbar from "@/components/media-progress-bar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,11 +7,13 @@ import { Switch } from "@/components/ui/switch";
 //import VideoPlayer from "@/components/video-player";
 import { courseCurriculumInitialFormData } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
-//import {
-//  mediaBulkUploadService,
+import {
+// //  mediaBulkUploadService,
 //  mediaDeleteService,
-//  mediaUploadService,
-//} from "@/services";
+ mediaUploadService,
+} from "@/services";
+
+
 import { Upload } from "lucide-react";
 import { useContext, useRef } from "react";
 
@@ -219,12 +221,12 @@ function CourseCurriculum() {
         >
           Add Lecture
         </Button>
-        {/* {mediaUploadProgress ? (
-        //   <MediaProgressbar
-        //     isMediaUploading={mediaUploadProgress}
-        //     progress={mediaUploadProgressPercentage}
-        //   />
-        ) : null} */}
+        {mediaUploadProgress ? (
+          <MediaProgressbar
+            isMediaUploading={mediaUploadProgress}
+            progress={mediaUploadProgressPercentage}
+          />
+        ) : null}
         <div className="mt-4 space-y-4">
           {courseCurriculumFormData.map((curriculumItem, index) => (
             <div className="border p-5 rounded-md">
