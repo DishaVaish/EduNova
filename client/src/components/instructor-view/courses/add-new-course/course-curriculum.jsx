@@ -9,7 +9,7 @@ import { courseCurriculumInitialFormData } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
 import {
 // //  mediaBulkUploadService,
-//  mediaDeleteService,
+ mediaDeleteService,
  mediaUploadService,
 } from "@/services";
 
@@ -117,6 +117,7 @@ function CourseCurriculum() {
       );
     });
   }
+  console.log(courseCurriculumFormData);
 
   function handleOpenBulkUploadDialog() {
     bulkUploadInputRef.current?.click();
