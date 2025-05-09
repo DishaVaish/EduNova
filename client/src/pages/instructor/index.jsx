@@ -14,14 +14,16 @@ function InstructorDashboardpage() {
   const { instructorCoursesList, setInstructorCoursesList } =
     useContext(InstructorContext);
 
-//   async function fetchAllCourses() {
-//     const response = await fetchInstructorCourseListService();
-//     if (response?.success) setInstructorCoursesList(response?.data);
-//   }
+  async function fetchAllCourses() {
+    const response = await fetchInstructorCourseListService();
+    if (response?.success) setInstructorCoursesList(response?.data);
+  }
 
-//   useEffect(() => {
-//     fetchAllCourses();
-//   }, []);
+  // console.log(response);
+
+  useEffect(() => {
+    fetchAllCourses();
+  }, []);
 
   const menuItems = [
     {
