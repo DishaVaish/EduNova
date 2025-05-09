@@ -5,15 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
- 
   courseLandingInitialFormData,
 } from "@/config";
 import { AuthContext } from "@/context/auth-context";
 import { InstructorContext } from "@/context/instructor-context";
 import {
-  //addNewCourseService,
+  addNewCourseService,
   fetchInstructorCourseDetailsService,
- // updateCourseByIdService,
+  updateCourseByIdService,
 } from "@/services";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,14 +24,23 @@ function AddNewCoursePage() {
     setCourseLandingFormData,
     setCourseCurriculumFormData,
     currentEditedCourseId,
-
+    setCurrentEditedCourseId, // This is added from context if you want to store the ID globally
   } = useContext(InstructorContext);
 
   const { auth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const params = useParams();
+  const params = useParams();  // Extract the courseId from the route
 
-  console.log(params);
+  // Set the course ID from params to the context when component mounts or the ID changes
+  useEffect(() => {
+    const { courseId } = params;
+    if (courseId) {
+      setCurrentEditedCourseId(courseId);  // Update context with the courseId
+      fetchCurrentCourseDetails(courseId);  // Fetch course details if in edit mode
+    }
+  }, [params.courseId]);  // Re-run this effect when courseId changes in the URL
+
+  console.log("Course ID from params:", params.courseId);
 
   function isEmpty(value) {
     if (Array.isArray(value)) {
@@ -79,6 +87,8 @@ function AddNewCoursePage() {
       isPublised: true,
     };
 
+    console.log(courseFinalFormData, "courseFinalFormData");
+
     const response =
       currentEditedCourseId !== null
         ? await updateCourseByIdService(
@@ -89,20 +99,16 @@ function AddNewCoursePage() {
 
     if (response?.success) {
       setCourseLandingFormData(courseLandingInitialFormData);
-      setCourseCurriculumFormData();
-      navigate(-1);
-    
+      setCourseCurriculumFormData([]);
+      navigate(-1);  // Navigate back after successful creation/updation
     }
 
     console.log(courseFinalFormData, "courseFinalFormData");
   }
 
-  async function fetchCurrentCourseDetails() {
-     
-    const response = await fetchInstructorCourseDetailsService(
-      currentEditedCourseId
-    );
- 
+  async function fetchCurrentCourseDetails(courseId) {
+    const response = await fetchInstructorCourseDetailsService(courseId);
+
     if (response?.success) {
       const setCourseFormData = Object.keys(
         courseLandingInitialFormData
@@ -117,21 +123,15 @@ function AddNewCoursePage() {
       setCourseCurriculumFormData(response?.data?.curriculum);
     }
 
-   console.log(response, "response");
+    console.log(response, "response");
   }
-
-  useEffect(() => {
-    if (currentEditedCourseId !== null) fetchCurrentCourseDetails();
-  }, [currentEditedCourseId]);
-
-
-
-  console.log(params, currentEditedCourseId, "params");
 
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-extrabold mb-5">Create a new course</h1>
+        <h1 className="text-3xl font-extrabold mb-5">
+          {currentEditedCourseId ? "Edit your course" : "Create a new course"}
+        </h1>
         <Button
           disabled={!validateFormData()}
           className="text-sm tracking-wider font-bold px-8"

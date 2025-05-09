@@ -4,26 +4,22 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes=require("./routes/auth-routes/index")
 const mediaRoutes=require("./routes/instructor-routes/media-routes")
+const instructorCourseRoutes = require("./routes/instructor-routes/course-routes");
 const app=express();
 const PORT=process.env.PORT || 5000;
 const MONGO_URI=process.env.MONGO_URI;
 
 app.use(
   cors({
-    // origin: process.env.CLIENT_URL,
-    origin: function (origin, callback) {
-      if (!origin || /^http:\/\/localhost:\d+$/.test(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS: " + origin));
-      }
-    },
+    origin: process.env.CLIENT_URL,
+  
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
   app.use(express.json());
+  
 
   //database connection
   mongoose
@@ -34,6 +30,8 @@ app.use(
     //routes configuration
     app.use('/auth',authRoutes);
     app.use('/media',mediaRoutes);
+    app.use("/instructor/course", instructorCourseRoutes);
+
     app.use((err, req, res, next) => {
         console.log(err.stack);
         res.status(500).json({
@@ -46,3 +44,5 @@ app.use(
     app.listen(PORT, () => {
         console.log(`Server is now running on port ${PORT}`);
       });
+
+
