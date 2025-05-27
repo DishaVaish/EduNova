@@ -31,16 +31,16 @@ function AddNewCoursePage() {
   const navigate = useNavigate();
   const params = useParams();  // Extract the courseId from the route
 
-  // Set the course ID from params to the context when component mounts or the ID changes
-  useEffect(() => {
-    const { courseId } = params;
-    if (courseId) {
-      setCurrentEditedCourseId(courseId);  // Update context with the courseId
-      fetchCurrentCourseDetails(courseId);  // Fetch course details if in edit mode
-    }
-  }, [params.courseId]);  // Re-run this effect when courseId changes in the URL
+  // // Set the course ID from params to the context when component mounts or the ID changes
+  // useEffect(() => {
+  //   const { courseId } = params;
+  //   if (courseId) {
+  //     setCurrentEditedCourseId(courseId);  // Update context with the courseId
+  //     fetchCurrentCourseDetails(courseId);  // Fetch course details if in edit mode
+  //   }
+  // }, [params.courseId]);  // Re-run this effect when courseId changes in the URL
 
-  console.log("Course ID from params:", params.courseId);
+  console.log(params);
 
   function isEmpty(value) {
     if (Array.isArray(value)) {
@@ -125,6 +125,15 @@ function AddNewCoursePage() {
 
     console.log(response, "response");
   }
+    useEffect(() => {
+    if (currentEditedCourseId !== null) fetchCurrentCourseDetails(currentEditedCourseId);
+  }, [currentEditedCourseId]);
+
+  useEffect(() => {
+    if (params?.courseId) setCurrentEditedCourseId(params?.courseId);
+  }, [params?.courseId]);
+
+  console.log(params, currentEditedCourseId, "params");
 
   return (
     <div className="container mx-auto p-4">
