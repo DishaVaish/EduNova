@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { createContext,useState } from "react";
 import { initialSignInFormData, initialSignUpFormData } from "@/config";
-import { registerService , loginService } from "@/services";
+import {  checkAuthService, registerService , loginService } from "@/services";
 import { useEffect } from "react";
 
 export const AuthContext=createContext(null);

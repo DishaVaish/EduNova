@@ -14,7 +14,7 @@ import { sortOptions } from "@/config";
 import { AuthContext } from "@/context/auth-context";
 import { StudentContext } from "@/context/student-context";
 import {
-  //checkCoursePurchaseInfoService,
+  checkCoursePurchaseInfoService,
   fetchStudentViewCourseListService,
 } from "@/services";
 import { filterOptions } from "@/config";
@@ -194,7 +194,7 @@ function StudentViewCoursesPage() {
             {studentViewCoursesList && studentViewCoursesList.length > 0 ? (
               studentViewCoursesList.map((courseItem) => (
                 <Card
-                  onClick={() => handleCourseNavigate(courseItem?._id)}
+                  onClick={() => navigate(`/course/details/${courseItem?._id}`)}
                   className="cursor-pointer"
                   key={courseItem?._id}
                 >

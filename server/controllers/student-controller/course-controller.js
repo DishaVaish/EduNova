@@ -60,7 +60,7 @@ const getAllStudentViewCourses = async (req, res) => {
       message: "Some error occured!",
     });
   }
-};
+}; 
 
 const getStudentViewCourseDetails = async (req, res) => {
   try {
@@ -87,7 +87,6 @@ const getStudentViewCourseDetails = async (req, res) => {
     });
   }
 };
-
 
 module.exports = {
   getAllStudentViewCourses,
