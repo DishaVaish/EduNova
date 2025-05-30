@@ -3,8 +3,9 @@ import {Link} from "react-router-dom";
 import { Button } from "../ui/button";
 import {useContext } from "react";
 import {AuthContext} from "@/context/auth-context";
-
+import { useNavigate } from "react-router-dom";
 function StudentViewCommonHeader(){
+    const navigate = useNavigate()
      const { resetCredentials } = useContext(AuthContext);
     function handleLogout(){
         resetCredentials();
@@ -19,7 +20,10 @@ function StudentViewCommonHeader(){
                   <span className="font-extrabold md:text-xl text-[14px]">LMS LEARN</span>
                 </Link>
                 <div className="flex items-center space-x-1">
-                    <Button variant="ghost" className="text-[14px] md:text-[16px] font-medium">
+                    <Button 
+                    variant="ghost" 
+                    onClick={()=> navigate("/courses")}
+                    className="text-[14px] md:text-[16px] font-medium">
                        Explore Courses 
                     </Button>
                 </div>
