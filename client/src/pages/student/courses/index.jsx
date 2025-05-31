@@ -93,6 +93,8 @@ function StudentViewCoursesPage() {
       getCurrentCourseId,
       auth?.user?._id
     );
+    
+console.log(response);
 
     if (response?.success) {
       if (response?.data) {
@@ -194,7 +196,7 @@ function StudentViewCoursesPage() {
             {studentViewCoursesList && studentViewCoursesList.length > 0 ? (
               studentViewCoursesList.map((courseItem) => (
                 <Card
-                  onClick={() => navigate(`/course/details/${courseItem?._id}`)}
+                  onClick={()=>handleCourseNavigate(courseItem?._id)}
                   className="cursor-pointer"
                   key={courseItem?._id}
                 >

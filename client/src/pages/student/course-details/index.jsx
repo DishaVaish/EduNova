@@ -37,7 +37,8 @@ function StudentViewCourseDetailsPage() {
     useState(null);
   const [showFreePreviewDialog, setShowFreePreviewDialog] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState("");
-  const navigate = useNavigate();
+
+  // const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
 
@@ -111,7 +112,8 @@ async function fetchStudentViewCourseDetails() {
   }, [location.pathname]);
 
  if (loadingState) return <Skeleton />;
- 
+
+
   if (approvalUrl !== "") {
     window.location.href = approvalUrl;
   }

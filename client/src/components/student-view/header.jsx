@@ -17,7 +17,7 @@ function StudentViewCommonHeader(){
             <div className="flex items-center space-x-4">
                 <Link to="/home" className="flex items-center hover:text-black">
                   <GraduationCap className="h-8 w-8 mr-4 "/>
-                  <span className="font-extrabold md:text-xl text-[14px]">LMS LEARN</span>
+                  <span className="font-extrabold md:text-xl text-[14px]">EduNova</span>
                 </Link>
                 <div className="flex items-center space-x-1">
                     <Button 
@@ -30,7 +30,7 @@ function StudentViewCommonHeader(){
             </div>
             <div className="flex items-center space-x-4">
                 <div className="flex gap-4 items-center">
-                    <div className="flex items-center gap-3">
+                    <div onClick={()=>navigate("/student-courses")} className="flex items-center gap-3">
                         <span className="font-extrabold md:text-xl text-[14px]">My Courses</span>
                         <TvMinimalPlay className="w-8 h-8 cursor-pointer"/>
                     </div>
