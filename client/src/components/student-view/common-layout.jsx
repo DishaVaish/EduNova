@@ -1,9 +1,13 @@
 import StudentViewCommonHeader from "./header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 function StudentViewCommonLayout(){
+    const location = useLocation();
     return (
         <div>
-            <StudentViewCommonHeader/>
+            {!location.pathname.includes("course-progress") ? (
+                <StudentViewCommonHeader/>
+            ): null}
+            
             <Outlet/>
         </div>
      );
