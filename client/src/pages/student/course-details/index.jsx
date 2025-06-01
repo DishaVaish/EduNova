@@ -38,13 +38,24 @@ function StudentViewCourseDetailsPage() {
   const [showFreePreviewDialog, setShowFreePreviewDialog] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState("");
 
-  // const navigate = useNavigate();
+ const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
 
-async function fetchStudentViewCourseDetails() { 
+async function fetchStudentViewCourseDetails() {
+  
+  const checkCoursePurchaseInfoResponse = await checkCoursePurchaseInfoService(currentCourseDetailsId, auth?.user._id);
+
+  if(checkCoursePurchaseInfoResponse?.success && checkCoursePurchaseInfoResponse?.data)
+  {
+    navigate(`/course-progress/${currentCourseDetailsId}`)
+    return
+  }
+
+ 
+
     const response = await fetchStudentViewCourseDetailsService(
-      currentCourseDetailsId
+      currentCourseDetailsIdtailsId, auth?.user._id 
     );
 //  console.log(response);
     if (response?.success) {
